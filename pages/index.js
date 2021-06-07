@@ -8,12 +8,13 @@ function useOptimizeAB(experimentId) {
   useEffect(() => {
     window.dataLayer.push({ event: "optimize.activate" });
     let interval = setInterval(() => {
+      console.log("windows", window.google_optimize);
       if (window.google_optimize !== undefined) {
         const variant = window.google_optimize.get(experimentId);
         if (typeof variant !== "undefined") setVariant(Number(variant));
         clearInterval(interval);
       }
-    }, 100);
+    }, 3000);
   }, []);
   return variant;
 }
