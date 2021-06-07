@@ -1,8 +1,27 @@
+import { useState, useEffect } from "react";
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
 
+function useOptimizeAB(experimentId) {
+  const [variant, setVariant] = useState();
+  useEffect(() => {
+    window.dataLayer.push({ event: "optimize.activate" });
+    let interval = setInterval(() => {
+      if (window.google_optimize !== undefined) {
+        const variant = window.google_optimize.get(experimentId);
+        if (typeof variant !== "undefined") setVariant(Number(variant));
+        clearInterval(interval);
+      }
+    }, 100);
+  }, []);
+  return variant;
+}
+
 export default function Home() {
+  // ... then in _app.js you can use the variant for whatever
+  const variant = useOptimizeAB("Z8IfX7lLSGm7PWNXZmrUvg");
+  console.log("variant: ", variant);
   return (
     <div className={styles.container}>
       <Head>
