@@ -8,9 +8,11 @@ function useOptimizeAB(experimentId) {
   useEffect(() => {
     window.dataLayer.push({ event: "optimize.activate" });
     let interval = setInterval(() => {
-      console.log("windows", window.google_optimize);
+      console.log("windows => ", window.google_optimize);
       if (window.google_optimize !== undefined) {
+        console.log("experimentId => ", experimentId);
         const variant = window.google_optimize.get(experimentId);
+        console.log("variant => ", variant);
         if (typeof variant !== "undefined") setVariant(Number(variant));
         clearInterval(interval);
       }
@@ -23,6 +25,7 @@ export default function Home() {
   // ... then in _app.js you can use the variant for whatever
   const variant = useOptimizeAB("Z8IfX7lLSGm7PWNXZmrUvg");
   console.log("variant: ", variant);
+
   return (
     <div className={styles.container}>
       <Head>
