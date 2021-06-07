@@ -16,6 +16,14 @@ function useOptimizeAB(experimentId) {
         if (typeof variant !== "undefined") setVariant(Number(variant));
         clearInterval(interval);
       }
+
+      //get all experiments:
+      Object.keys(window.gaData["UA-198905767-1"].experiments).forEach(
+        function (key, index) {
+          var value = window.gaData["UA-198905767-1"].experiments[key];
+          console.log("Info", key, value, index);
+        }
+      );
     }, 3000);
   }, []);
   return variant;
