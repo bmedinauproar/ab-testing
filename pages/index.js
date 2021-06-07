@@ -18,6 +18,7 @@ function useOptimizeAB(experimentId) {
       }
 
       //get all experiments:
+      console.log("experiments", window.gaData["UA-198905767-1"].experiments);
       Object.keys(window.gaData["UA-198905767-1"].experiments).forEach(
         function (key, index) {
           var value = window.gaData["UA-198905767-1"].experiments[key];
