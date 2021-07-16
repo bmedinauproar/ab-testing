@@ -50,10 +50,22 @@ export default function Home() {
           async
           src="https://www.googletagmanager.com/gtag/js?id=UA-198905767-1"
         />
+
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+                  window.dataLayer = window.dataLayer || [];
+                  function gtag(){dataLayer.push(arguments)}
+                  gtag('js', new Date());
+                  gtag('config', 'UA-198905767-1', { optimize_id: 'OPT-TQ7N4PM'});
+              `,
+          }}
+        />
         <script
           async
           src="https://www.googletagmanager.com/gtag/js?id=UA-198905767-1"
         />
+
         <script
           dangerouslySetInnerHTML={{
             __html: `
