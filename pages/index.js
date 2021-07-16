@@ -51,6 +51,10 @@ export default function Home() {
           src="https://www.googletagmanager.com/gtag/js?id=UA-198905767-1"
         />
         <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=UA-198905767-1"
+        />
+        <script
           dangerouslySetInnerHTML={{
             __html: `
                   window.dataLayer = window.dataLayer || [];
