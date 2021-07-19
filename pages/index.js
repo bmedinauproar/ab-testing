@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
+const GTM_ID = "GTM-TL6HWN7";
 
 function useOptimizeAB(experimentId) {
   const [variant, setVariant] = useState();
@@ -32,8 +33,8 @@ function useOptimizeAB(experimentId) {
 
 export default function Home() {
   // ... then in _app.js you can use the variant for whatever
-  const variant = useOptimizeAB("Z8IfX7lLSGm7PWNXZmrUvg");
-  console.log("variant: ", variant);
+  // const variant = useOptimizeAB("Z8IfX7lLSGm7PWNXZmrUvg");
+  // console.log("variant: ", variant);
 
   return (
     <div className={styles.container}>
@@ -46,34 +47,21 @@ export default function Home() {
           href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,800;1,300;1,400;1,600;1,800&display=swap"
           rel="stylesheet"
         />
-        <script
-          async
-          src="https://www.googletagmanager.com/gtag/js?id=UA-198905767-1"
-        />
-
+        {/* Google Tag Manager */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `
-                  window.dataLayer = window.dataLayer || [];
-                  function gtag(){dataLayer.push(arguments)}
-                  gtag('js', new Date());
-                  gtag('config', 'UA-198905767-1', { optimize_id: 'OPT-TQ7N4PM'});
-              `,
+            __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+                      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+                      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+                      })(window,document,'script','dataLayer','${GTM_ID}');`,
           }}
         />
-        <script
-          async
-          src="https://www.googletagmanager.com/gtag/js?id=UA-198905767-1"
-        />
-
-        <script
+        {/* End Google Tag Manager */}
+        {/* Google Tag Manager (noscript) */}
+        <noscript
           dangerouslySetInnerHTML={{
-            __html: `
-                  window.dataLayer = window.dataLayer || [];
-                  function gtag(){dataLayer.push(arguments)}
-                  gtag('js', new Date());
-                  gtag('config', 'UA-198905767-1', { optimize_id: 'OPT-TQ7N4PM'});
-              `,
+            __html: `<iframe src="https://www.googletagmanager.com/ns.html?id=${GTM_ID}" height="0" width="0" style="display:none;visibility:hidden"></iframe>`,
           }}
         />
       </Head>
