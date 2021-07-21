@@ -26,7 +26,7 @@ function useOptimizeAB(experimentId) {
           console.log("Info", key, value, index);
         }
       );
-    }, 3000);
+    }, 500);
   }, []);
   return variant;
 }
