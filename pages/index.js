@@ -33,8 +33,8 @@ function useOptimizeAB(experimentId) {
 
 export default function Home() {
   // ... then in _app.js you can use the variant for whatever
-  // const variant = useOptimizeAB("Z8IfX7lLSGm7PWNXZmrUvg");
-  // console.log("variant: ", variant);
+  const variant = useOptimizeAB("Z8IfX7lLSGm7PWNXZmrUvg");
+  console.log("variant: ", variant);
 
   return (
     <div className={styles.container}>
