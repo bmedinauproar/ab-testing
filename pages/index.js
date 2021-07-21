@@ -4,31 +4,19 @@ import Image from "next/image";
 import styles from "../styles/Home.module.css";
 const GTM_ID = "GTM-TL6HWN7";
 
-function useOptimizeAB(experimentId) {
+function useOptimize(propertyId) {
   const [experiments, setExperiments] = useState();
   useEffect(() => {
     let interval = setInterval(() => {
-      // console.log("windows => ", window.google_optimize);
-      // if (window.google_optimize !== undefined) {
-      //   console.log("experimentId => ", experimentId);
-      //   const variant = window.google_optimize.get(experimentId);
-      //   console.log("variant => ", variant);
-      //   if (typeof variant !== "undefined") setVariant(Number(variant));
-      //   clearInterval(interval);
-      // }
-
-      //get all experiments:
-      console.log("experiments", window.gaData["UA-198905767-1"].experiments);
+      console.log("useOptimize");
       const data = [];
-      Object.keys(window.gaData["UA-198905767-1"].experiments).forEach(
-        (key, index) => {
-          var value = window.gaData["UA-198905767-1"].experiments[key];
-          console.log("Info", key, value, index);
+      Object.keys(window?.gaData[propertyId]?.experiments || []).forEach(
+        (key) => {
+          var value = window?.gaData[propertyId]?.experiments[key];
           data.push({ id: key, variant: value });
         }
       );
       setExperiments(data);
-      console.log("optimize: ", window.google_optimize);
       if (window.google_optimize !== undefined) {
         clearInterval(interval);
       }
@@ -38,9 +26,10 @@ function useOptimizeAB(experimentId) {
 }
 
 export default function Home() {
+  const propertyId = "UA-198905767-1";
   // ... then in _app.js you can use the variant for whatever
-  const { experiments } = useOptimizeAB("Z8IfX7lLSGm7PWNXZmrUvg");
-  console.log("variant: ", experiments);
+  const { experiments } = useOptimize(propertyId);
+  console.log("experiments: ", experiments);
 
   return (
     <div className={styles.container}>
