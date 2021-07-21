@@ -5,36 +5,42 @@ import styles from "../styles/Home.module.css";
 const GTM_ID = "GTM-TL6HWN7";
 
 function useOptimizeAB(experimentId) {
-  const [variant, setVariant] = useState();
+  const [experiments, setExperiments] = useState();
   useEffect(() => {
-    window.dataLayer.push({ event: "optimize.activate" });
     let interval = setInterval(() => {
-      console.log("windows => ", window.google_optimize);
-      if (window.google_optimize !== undefined) {
-        console.log("experimentId => ", experimentId);
-        const variant = window.google_optimize.get(experimentId);
-        console.log("variant => ", variant);
-        if (typeof variant !== "undefined") setVariant(Number(variant));
-        clearInterval(interval);
-      }
+      // console.log("windows => ", window.google_optimize);
+      // if (window.google_optimize !== undefined) {
+      //   console.log("experimentId => ", experimentId);
+      //   const variant = window.google_optimize.get(experimentId);
+      //   console.log("variant => ", variant);
+      //   if (typeof variant !== "undefined") setVariant(Number(variant));
+      //   clearInterval(interval);
+      // }
 
       //get all experiments:
       console.log("experiments", window.gaData["UA-198905767-1"].experiments);
+      const data = [];
       Object.keys(window.gaData["UA-198905767-1"].experiments).forEach(
-        function (key, index) {
+        (key, index) => {
           var value = window.gaData["UA-198905767-1"].experiments[key];
           console.log("Info", key, value, index);
+          data.push({ id: key, variant: value });
         }
       );
+      setExperiments(data);
+      console.log("optimize: ", window.google_optimize);
+      if (window.google_optimize !== undefined) {
+        clearInterval(interval);
+      }
     }, 500);
   }, []);
-  return variant;
+  return { experiments };
 }
 
 export default function Home() {
   // ... then in _app.js you can use the variant for whatever
-  const variant = useOptimizeAB("Z8IfX7lLSGm7PWNXZmrUvg");
-  console.log("variant: ", variant);
+  const { experiments } = useOptimizeAB("Z8IfX7lLSGm7PWNXZmrUvg");
+  console.log("variant: ", experiments);
 
   return (
     <div className={styles.container}>
