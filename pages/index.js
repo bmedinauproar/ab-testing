@@ -5,10 +5,9 @@ import styles from "../styles/Home.module.css";
 const GTM_ID = "GTM-TL6HWN7";
 
 function useOptimize(propertyId) {
-  const [experiments, setExperiments] = useState();
+  const [experiments, setExperiments] = useState(null);
   useEffect(() => {
     let interval = setInterval(() => {
-      console.log("useOptimize");
       const data = [];
       Object.keys(window?.gaData[propertyId]?.experiments || []).forEach(
         (key) => {
