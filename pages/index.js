@@ -3,6 +3,7 @@ import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
 const GTM_ID = "GTM-TL6HWN7";
+import axios from "axios";
 
 function useOptimize(propertyId) {
   const [experiments, setExperiments] = useState(null);
@@ -29,6 +30,22 @@ export default function Home() {
   // ... then in _app.js you can use the variant for whatever
   const { experiments } = useOptimize(propertyId);
   console.log("experiments: ", experiments);
+
+  const getData = async () => {
+    try {
+      const snapshot = await axios.get(
+        "https://services.marchex.com/mcm/listings?partnerId=bchybs0z&searchType=keywordOrBusiness&searchTerm=storage&zip=89501&limit=20&radius=40"
+      );
+      console.log(snapshot?.data || []);
+    } catch (error) {
+      console.log("error", error);
+    } finally {
+    }
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
 
   return (
     <div className={styles.container}>
